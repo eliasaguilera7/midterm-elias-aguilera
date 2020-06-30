@@ -12,13 +12,13 @@
       <div class="card my-5">
         <div class="card-header">
           <h5 class="card-title">
-            for: <%= reservation.user.restaurant %>
+            for: <%= reservation.restaurant %>
           </h5>
         </div>
 
         <div class="card-body">
           <p class="card-text">
-            Your reservation is for <strong><%= reservation.user.dateAndTime %></strong> for <%= reservation.user.quantityOfGuestst %>. Please be on time to avoid losing your seat.
+            Your reservation is for <strong><%= reservation.dateAndTime %></strong> for <%= reservation.quantityOfGuestst %>. Please be on time to avoid losing your seat.
           </p>
         </div>
 
