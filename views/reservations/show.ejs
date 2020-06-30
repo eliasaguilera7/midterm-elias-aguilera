@@ -3,7 +3,7 @@
 <div class="container my-5">
   <header>
     <h1>
-      Reservation for <%= reservation.user.restaurant %>
+      Reservation for <%= reservation.restaurant %>
     </h1>
   </header>
   <hr>
@@ -11,7 +11,7 @@
     <p>
       <strong>For:</strong>&nbsp;<%= reservation.user.fullname %>
       <br>
-      <strong>At:</strong>&nbsp;<%= reservation.user.dateAndTime %>
+      <strong>At:</strong>&nbsp;<%= reservation.dateAndTime %>
     </p>
   </div>
   <hr>
