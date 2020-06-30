@@ -11,9 +11,9 @@ exports.new = (req, res) => {
 exports.create = (req, res, next) => {
   passport.authenticate('local', {
     successRedirect: '/reservations',
-    successFlash: 'You were successfully logged in.',
+    successFlash: 'Perfect!. Your are now successfully logged in.',
     failureRedirect: '/login',
-    failureFlash: 'Invalid credentials'
+    failureFlash: 'Invalid credentials, please try again'
   })(req, res, next);
 };
 

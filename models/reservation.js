@@ -1,44 +1,64 @@
+// You need to define the schema for a reservation
+// The fields you require are:
+// associated user
+// quantity of guests
+// restaurant name
+// date and time of reservation (you can do these as separate fields if you wish) 
+
 const mongoose = require('mongoose');
 
 const ReservationSchema = new mongoose.Schema({
-  user: {
+    user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
     required: true
-  },
-  restaurant: {
+   }, 
+   
+   restaurant: {
     type: String,
-    enum: [
-      'Kelseys',
-      'Montanas',
-      'Outbacks',
-      'Harveys',
-      'Swiss Chalet'
-    ],
-    default: 'Kelseys',
     required: true
   },
-  dateAndTime: {
-    type: Date,
-    required: true,
-    set: val => {
-      return new Date(val);
-    },
-    get: val => {
-      // return `${val.getFullYear()}-${val.getMonth() + 1}-${val.getDate()}T${val.getHours()}:${val.getMinutes()}:${val.getSeconds()}`;
-      const date = val.toISOString();
-      return date.substring(0, date.length - 1);
-    }
-  },
-  quantityOfGuests: {
-    type: Number,
-    default: 2,
+
+   dateAndTime: {
+    type: String,
     required: true
-  }
-}, {
-  timestamps: true
+   },
+  
+   quantityOfGuests: {
+    type: String,
+    required: true
+   },
+   status: {
+    type: String,
+    enum: ['DRAFT', 'PUBLISHED'],
+    default: 'DRAFT'
+  }}, {
+    timestamps: true
+
 });
 
+ReservationSchema.query.drafts = function () {
+    return this.where({
+      status: 'DRAFT'
+    })
+  };
+  
+  
+  ReservationSchema.query.published = function () {
+    return this.where({
+      status: 'PUBLISHED'
+    })
+  };
+  
+  ReservationSchema.virtual('synopsis')
+  .get(function () {
+    const post = this.content;
+    return post
+      .replace(/(<([^>]+)>)/ig,"")
+      .substring(0, 250);
+  });
+  
+  module.exports = mongoose.model('Reservation', ReservationSchema);
 
 
-module.exports = mongoose.model('Reservation', ReservationSchema);
+

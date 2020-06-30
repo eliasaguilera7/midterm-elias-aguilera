@@ -7,6 +7,7 @@
     <label for="restaurant">Restaurant</label>
     <select name="restaurant" class="form-control">
       <option>Select a Restaurant</option>
+      <%let restaurants = ["Kelseys","Montanas", "Outbacks", "Harveys","Swiss Chalet" ]  %>
       <% for (let restaurant of restaurants) { %>
         <option <%= (restaurant === formData.restaurant) && 'selected' %> value="<%= restaurant %>"><%= restaurant %></option>
       <% } %>
